@@ -1,44 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hold Job Tracker</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for smooth tab switching -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hold Job Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .tab-content {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        .active {
+            border-bottom: 2px solid #fff;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
+    <header>
+        <h1>Hold Job Tracker</h1>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link active" id="holdJobActionTab">Hold Job Action</a></li>
+                <li><a href="#" class="nav-link" id="dashboardTab">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Navigation Bar -->
-  <header>
-    <nav class="navbar">
-      <ul class="nav-list">
-        <li><a href="#" class="nav-link active" id="holdJobActionTab">Hold Job Action</a></li>
-        <li><a href="#" class="nav-link" id="dashboardTab">Dashboard</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div class="container">
+        <section id="holdJobActionSection" class="tab-content" style="display: block;">
+            <h2>Hold Job Action</h2>
+            <iframe src="https://script.google.com/macros/s/AKfycbyFNdy5K5PsOaLTMqp3zUJtG7wNQPKBHepZ5JYVmGlkFmVq6Q0-qxZ9BbwqmrixwEcu_A/exec" id="holdJobActionIframe"></iframe>
+        </section>
 
-  <!-- Main Content Area -->
-  <main>
-    <section id="holdJobAction" class="tab-content active">
-      <h2>Hold Job Action</h2>
-      <p>Manage your hold jobs here. Assign actions and track progress.</p>
-      <!-- Add more content here for Hold Job Action -->
-    </section>
+        <section id="dashboardSection" class="tab-content">
+            <h2>Dashboard</h2>
+            <iframe src="https://script.google.com/macros/s/AKfycbz_LYIfTaadCwulV4rMKo2QJVre6M1N7aGF39EGqZs7-yEFehtDy3xINnZe1bnlE5qQqQ/exec" id="dashboardIframe"></iframe>
+        </section>
+    </div>
 
-    <section id="dashboard" class="tab-content">
-      <h2>Dashboard</h2>
-      <p>Overview of the status of all jobs, with quick links to manage actions.</p>
-      <!-- Add more content here for Dashboard -->
-    </section>
-  </main>
+    <script>
+        document.getElementById("holdJobActionTab").addEventListener("click", function () {
+            showTab("holdJobActionSection", "holdJobActionTab");
+        });
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Hold Job Tracker | Created by YourName</p>
-  </footer>
+        document.getElementById("dashboardTab").addEventListener("click", function () {
+            showTab("dashboardSection", "dashboardTab");
+        });
 
-  <script src="scripts.js"></script> <!-- JS for tab switching -->
+        function showTab(sectionId, tabId) {
+            // Hide all sections
+            var sections = document.querySelectorAll('.tab-content');
+            sections.forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            // Remove active class from all tabs
+            var tabs = document.querySelectorAll('.nav-link');
+            tabs.forEach(function (tab) {
+                tab.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+
+            // Add active class to the selected tab
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
+
 </html>
